@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), PlayerActivity.class)
                         .putExtra("songs",mySongs)
                         .putExtra("songname",songName)
-                .putExtra("pos",position));
+                        .putExtra("pos",position));
             }
         });
     }

@@ -86,12 +86,13 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <Button
+                android:id="@+id/playbtn"
                 android:layout_width="70dp"
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/ic_play"
                 android:layout_height="70dp"
-                android:id="@+id/playbtn">
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/ic_pause">
 
             </Button>
             <Button
@@ -124,7 +125,7 @@
             </Button>
             <Button
                 android:id="@+id/btnfr"
-                android:layout_toLeftOf="@id/btnnext"
+                android:layout_toLeftOf="@id/btnprev"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="15dp"
                 android:background="@drawable/ic_fast_rewind"
