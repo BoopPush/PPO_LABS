@@ -39,9 +39,30 @@ public class PlayerActivity extends AppCompatActivity {
     Thread updateseekbar;
 
     @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId()==android.R.id.home){
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (visualizer != null){
+            visualizer.release();
+        }
+        super.onDestroy();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player);
+
+        getSupportActionBar().setTitle("Now Playing");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
 
         btnprev = findViewById(R.id.btnprev);
         btnnext = findViewById(R.id.btnnext);
@@ -151,7 +172,10 @@ public class PlayerActivity extends AppCompatActivity {
              }
          });
 
-         
+         int audiosessionId = mediaPlayer.getAudioSessionId();
+         if(audiosessionId != -1){
+             visualizer.setAudioSessionId(audiosessionId);
+         }
 
         btnnext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,6 +190,11 @@ public class PlayerActivity extends AppCompatActivity {
                 mediaPlayer.start();
                 btnplay.setBackgroundResource(R.drawable.ic_pause);
                 startAnimation(imageView);
+
+                int audiosessionId = mediaPlayer.getAudioSessionId();
+                if(audiosessionId != -1){
+                    visualizer.setAudioSessionId(audiosessionId);
+                }
             }
         });
 
@@ -183,6 +212,11 @@ public class PlayerActivity extends AppCompatActivity {
                 mediaPlayer.start();
                 btnplay.setBackgroundResource(R.drawable.ic_pause);
                 startAnimation(imageView);
+
+                int audiosessionId = mediaPlayer.getAudioSessionId();
+                if(audiosessionId != -1){
+                    visualizer.setAudioSessionId(audiosessionId);
+                }
             }
         });
 
