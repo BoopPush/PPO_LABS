@@ -115,6 +115,21 @@ public class PlayerActivity extends AppCompatActivity {
             }
         });
 
+        String endTime = createTime(mediaPlayer.getDuration());
+        txtsstop.setText(endTime);
+
+        final Handler handler = new Handler();
+        final int delay = 1000;
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                String currentTime = createTime(mediaPlayer.getCurrentPosition());
+                txtsstart.setText(currentTime);
+                handler.postDelayed(this,delay);
+            }
+        },delay);
+
         btnplay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -176,5 +191,19 @@ public class PlayerActivity extends AppCompatActivity {
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.playTogether(animator);
         animatorSet.start();
+    }
+
+    public String createTime(int duration){
+        String time = "";
+        int min = duration/1000/60;
+        int sec = duration/1000%60;
+
+        time +=min+ ":";
+        if (sec < 10){
+            time +="0";
+        }
+        time+=sec;
+
+        return time;
     }
 }
