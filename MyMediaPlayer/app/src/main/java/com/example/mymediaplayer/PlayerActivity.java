@@ -151,6 +151,8 @@ public class PlayerActivity extends AppCompatActivity {
              }
          });
 
+         
+
         btnnext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -181,6 +183,24 @@ public class PlayerActivity extends AppCompatActivity {
                 mediaPlayer.start();
                 btnplay.setBackgroundResource(R.drawable.ic_pause);
                 startAnimation(imageView);
+            }
+        });
+
+        btnff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mediaPlayer.isPlaying()){
+                    mediaPlayer.seekTo(mediaPlayer.getCurrentPosition()+10000);
+                }
+            }
+        });
+
+        btnfr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mediaPlayer.isPlaying()){
+                    mediaPlayer.seekTo(mediaPlayer.getCurrentPosition()-10000);
+                }
             }
         });
     }
