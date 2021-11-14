@@ -128,10 +128,10 @@ public class VideoPlayerActivity extends AppCompatActivity {
          x /= 60;
          hours = x%24;
          if (hours != 0){
-             time = String.format("%02d",hours)+":"+String.format("%02d",minutes)+":"+String.format("%02D",seconds);
+             time = String.format("%02d",hours)+":"+String.format("%02d",minutes)+":"+String.format("%02d",seconds);
 
          }else{
-             time = String.format("%02D",minutes)+":"+String.format("%02D",seconds);
+             time = String.format("%02d",minutes)+":"+String.format("%02d",seconds);
          }
 
          return time;
