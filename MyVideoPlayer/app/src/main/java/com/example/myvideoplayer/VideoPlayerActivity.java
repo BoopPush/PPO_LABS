@@ -104,10 +104,62 @@ public class VideoPlayerActivity extends AppCompatActivity {
 
     private void setHandler(){
         Handler handler = new Handler();
-        Runnable runnable = new 
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                if (videoView.getDuration() >0){
+                    int curPos = videoView.getCurrentPosition();
+                    videoSeekBar.setProgress(curPos);
+                    videoTimeTV.setText(""+convertTime(videoView.getDuration()- curPos));
+                }
+                handler.postDelayed(this,0);
+            }
+        };
+        handler.postDelayed(runnable,500);
+    }
+
+    private String convertTime(int ms){
+        String time;
+        int x,seconds,minutes,hours;
+        x = ms/1000;
+        seconds = x%60;
+        x/=60;
+        minutes = x% 60;
+         x /= 60;
+         hours = x%24;
+         if (hours != 0){
+             time = String.format("%02d",hours)+":"+String.format("%02d",minutes)+":"+String.format("%02D",seconds);
+
+         }else{
+             time = String.format("%02D",minutes)+":"+String.format("%02D",seconds);
+         }
+
+         return time;
     }
     private void initializeSeekBar(){
+        videoSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if (videoSeekBar.getId() == R.id.idSeekBarProgress){
+                    if (fromUser){
+                        videoView.seekTo(progress);
+                        videoView.start();
+                        int curPos = videoView.getCurrentPosition();
+                        videoTimeTV.setText(""+convertTime(videoView.getDuration()-curPos));
+                    }
+                }
+            }
 
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
     }
 
     private void showControls() {
