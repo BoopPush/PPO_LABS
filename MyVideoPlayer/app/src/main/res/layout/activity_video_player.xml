@@ -20,4 +20,6 @@
             android:keepScreenOn="true"
             android:id="@+id/idVideoView"/>
     </RelativeLayout>
+
+    <include layout="@layout/custom_controls"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
