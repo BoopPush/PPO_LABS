@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.os.Bundle;
+import android.os.Environment;
 import android.widget.Toast;
 
 import com.karumi.dexter.Dexter;
@@ -18,12 +19,15 @@ import com.karumi.dexter.listener.single.PermissionListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.RecursiveAction;
 
 public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
-    List<File> fileList;
-    File path = new File(System.getenv("EXTERNAl_STORAGE"));
+
+/*
+    File path = new File(Objects.requireNonNull(System.getenv("EXTERNAl_STORAGE")));
+*/
     CustomAdapter customAdapter;
 
     @Override
@@ -56,11 +60,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void displayFiles() {
+
+        final List<File> fileList = findVideos(Environment.getExternalStorageDirectory());
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(this,2));
-        fileList = new ArrayList<>();
-        fileList.addAll(findVideos(path));
+        /*fileList = new ArrayList<>();
+        fileList.addAll(findVideos(path));*/
         customAdapter = new CustomAdapter(this,fileList);
         customAdapter.setHasStableIds(true);
         recyclerView.setAdapter(customAdapter);
