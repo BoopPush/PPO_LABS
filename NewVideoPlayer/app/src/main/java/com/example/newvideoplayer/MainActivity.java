@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.RecursiveAction;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SelectListener{
     RecyclerView recyclerView;
 
 /*
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new GridLayoutManager(this,2));
         /*fileList = new ArrayList<>();
         fileList.addAll(findVideos(path));*/
-        customAdapter = new CustomAdapter(this,fileList);
+        customAdapter = new CustomAdapter(this,fileList,this);
         customAdapter.setHasStableIds(true);
         recyclerView.setAdapter(customAdapter);
     }
@@ -87,5 +87,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return myVideos;
+    }
+
+    @Override
+    public void onFileClicked(File file) {
+
     }
 }
