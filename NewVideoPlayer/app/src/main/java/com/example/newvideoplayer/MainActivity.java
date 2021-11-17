@@ -93,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements SelectListener{
     @Override
     public void onFileClicked(File file) {
         startActivity(new Intent(MainActivity.this,PlayerActivity.class)
-        .putExtra("VIDEO",file.getAbsolutePath()));
+        .putExtra("videoPath",file.getAbsolutePath())
+        .putExtra("videoName",file.getName()));
     }
 }
