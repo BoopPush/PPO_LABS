@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.widget.Toast;
@@ -91,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements SelectListener{
 
     @Override
     public void onFileClicked(File file) {
-
+        startActivity(new Intent(MainActivity.this,PlayerActivity.class)
+        .putExtra("VIDEO",file.getAbsolutePath()));
     }
 }
